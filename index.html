@@ -168,6 +168,7 @@
   .contact-detail { display: flex; flex-direction: column; gap: 0.75rem; }
   .contact-item { font-size: 0.85rem; color: var(--text-mid); }
   .contact-item span { color: var(--text-light); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.2rem; }
+
   .contact-form { display: flex; flex-direction: column; gap: 1rem; }
   .contact-form input,
   .contact-form textarea,
@@ -177,6 +178,7 @@
     font-family: 'Jost', sans-serif; font-size: 0.9rem;
     color: var(--text-dark); outline: none;
     transition: border-color 0.2s;
+    width: 100%;
   }
   .contact-form input:focus,
   .contact-form textarea:focus,
@@ -361,20 +363,20 @@
           </div>
         </div>
       </div>
-      <form class="contact-form" action="https://formspree.io/f/xzdordvr" method="POST" enctype="application/x-www-form-urlencoded">   <input type="text" name="name" placeholder="Your name" />   <input type="email" name="email" placeholder="Email address" />   <select name="service">     <option value="" disabled selected>I'm interested in...</option>     <option value="HOA Submittal Package">HOA Submittal Package</option>     <option value="Residential Landscape Design">Residential Landscape Design</option>     <option value="Outdoor Living Space Design">Outdoor Living Space Design</option>     <option value="3D Rendering">3D Rendering</option>     <option value="Plant Installation">Plant Installation</option>     <option value="Landscape Maintenance">Landscape Maintenance</option>     <option value="Something else">Something else</option>   </select>   <textarea name="message" placeholder="Tell me a little about your project..."></textarea>   <button type="submit">Send inquiry</button> </form>
-        <input type="text" name="name" placeholder="Your name" />
-        <input type="email" name="email" placeholder="Email address" />
-        <select name="service">
+      <form class="contact-form" action="https://formspree.io/f/xzdordvr" method="POST">
+        <input type="text" name="name" placeholder="Your name" required />
+        <input type="email" name="email" placeholder="Email address" required />
+        <select name="service" required>
           <option value="" disabled selected>I'm interested in...</option>
-          <option>HOA Submittal Package</option>
-          <option>Residential Landscape Design</option>
-          <option>Outdoor Living Space Design</option>
-          <option>3D Rendering</option>
-          <option>Plant Installation</option>
-          <option>Landscape Maintenance</option>
-          <option>Something else</option>
+          <option value="HOA Submittal Package">HOA Submittal Package</option>
+          <option value="Residential Landscape Design">Residential Landscape Design</option>
+          <option value="Outdoor Living Space Design">Outdoor Living Space Design</option>
+          <option value="3D Rendering">3D Rendering</option>
+          <option value="Plant Installation">Plant Installation</option>
+          <option value="Landscape Maintenance">Landscape Maintenance</option>
+          <option value="Something else">Something else</option>
         </select>
-        <textarea name="message" placeholder="Tell me a little about your project..."></textarea>
+        <textarea name="message" placeholder="Tell me a little about your project..." required></textarea>
         <button type="submit">Send inquiry</button>
       </form>
     </div>
