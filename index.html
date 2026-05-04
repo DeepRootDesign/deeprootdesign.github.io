@@ -362,9 +362,9 @@
         </div>
       </div>
       <form class="contact-form" action="https://formspree.io/f/xzdordvr" method="POST">
-        <input type="text" placeholder="Your name" />
-        <input type="email" placeholder="Email address" />
-        <select>
+        <input type="text" name="name" placeholder="Your name" />
+        <input type="email" name="email" placeholder="Email address" />
+        <select name="service">
           <option value="" disabled selected>I'm interested in...</option>
           <option>HOA Submittal Package</option>
           <option>Residential Landscape Design</option>
@@ -374,7 +374,7 @@
           <option>Landscape Maintenance</option>
           <option>Something else</option>
         </select>
-        <textarea placeholder="Tell me a little about your project..."></textarea>
+        <textarea name="message" placeholder="Tell me a little about your project..."></textarea>
         <button type="submit">Send inquiry</button>
       </form>
     </div>
