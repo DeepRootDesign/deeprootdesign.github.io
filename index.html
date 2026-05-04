@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeepRoot Design Landscape</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --moss: #3B4A2F;
+    --moss-light: #5a6e47;
+    --bark: #6B4F3A;
+    --cream: #F5F0E8;
+    --parchment: #EDE5D0;
+    --sage: #8A9E72;
+    --sand: #C9B99A;
+    --text-dark: #2A2218;
+    --text-mid: #4A3F30;
+    --text-light: #7A6E5A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    font-weight: 300;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(245, 240, 232, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--sand);
+    padding: 1rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--moss); letter-spacing: 0.02em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--moss); }
+
+  .hero {
+    min-height: 100vh;
+    background: var(--moss);
+    display: flex; align-items: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.015) 40px,
+      rgba(255,255,255,0.015) 80px
+    );
+  }
+  .hero-inner { max-width: 900px; margin: 0 auto; position: relative; }
+  .hero-eyebrow {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--sage); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 40px; height: 1px; background: var(--sage);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 400; line-height: 1.1;
+    color: var(--cream); margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--sand); }
+  .hero-sub {
+    font-size: 1rem; color: rgba(245,240,232,0.7);
+    max-width: 480px; line-height: 1.8; margin-bottom: 2.5rem; font-weight: 300;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: transparent; border: 1px solid var(--sand);
+    color: var(--cream); padding: 0.85rem 2.2rem;
+    font-family: 'Jost', sans-serif; font-size: 0.8rem;
+    letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none;
+    transition: all 0.3s;
+  }
+  .hero-cta:hover { background: var(--sand); color: var(--moss); }
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; right: 0;
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    writing-mode: vertical-rl;
+  }
+
+  section { padding: 5rem 2rem; }
+  .section-inner { max-width: 1000px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--sage); margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 400; color: var(--moss); line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .about { background: var(--parchment); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-text p { color: var(--text-mid); line-height: 1.9; margin-bottom: 1rem; font-size: 0.95rem; }
+  .about-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .about-stat {
+    background: var(--cream);
+    padding: 1.5rem;
+    border-left: 3px solid var(--sage);
+  }
+  .about-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; color: var(--moss); line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .about-stat-label { font-size: 0.75rem; color: var(--text-light); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .services { background: var(--cream); }
+  .services-intro { max-width: 560px; color: var(--text-mid); line-height: 1.8; margin-bottom: 3rem; font-size: 0.95rem; }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5px; background: var(--sand); }
+  .service-card {
+    background: var(--cream);
+    padding: 2rem;
+    transition: background 0.3s;
+  }
+  .service-card:hover { background: var(--parchment); }
+  .service-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--moss);
+    margin-bottom: 0.6rem;
+  }
+  .service-desc { font-size: 0.85rem; color: var(--text-light); line-height: 1.7; }
+  .service-price { font-size: 0.8rem; color: var(--bark); margin-top: 0.75rem; font-weight: 500; letter-spacing: 0.05em; }
+
+  .process { background: var(--moss); }
+  .process .section-title { color: var(--cream); }
+  .process .section-label { color: var(--sage); }
+  .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem; }
+  .process-step { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1.5rem; }
+  .process-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--sage); opacity: 0.6; line-height: 1; margin-bottom: 0.75rem; }
+  .process-title { font-size: 0.9rem; font-weight: 500; color: var(--cream); margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+  .process-desc { font-size: 0.8rem; color: rgba(245,240,232,0.55); line-height: 1.7; }
+
+  .portfolio { background: var(--parchment); }
+  .portfolio-note {
+    background: var(--cream); border: 1px dashed var(--sand);
+    padding: 3rem; text-align: center; color: var(--text-light);
+    font-size: 0.9rem; line-height: 1.8;
+    font-style: italic;
+  }
+  .portfolio-note strong { color: var(--moss); font-style: normal; }
+
+  .contact { background: var(--cream); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .contact-info p { color: var(--text-mid); line-height: 1.9; font-size: 0.95rem; margin-bottom: 1.5rem; }
+  .contact-detail { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-item { font-size: 0.85rem; color: var(--text-mid); }
+  .contact-item span { color: var(--text-light); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.2rem; }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form select {
+    background: var(--parchment); border: 1px solid var(--sand);
+    padding: 0.85rem 1rem;
+    font-family: 'Jost', sans-serif; font-size: 0.9rem;
+    color: var(--text-dark); outline: none;
+    transition: border-color 0.2s;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus,
+  .contact-form select:focus { border-color: var(--moss); }
+  .contact-form textarea { resize: vertical; min-height: 100px; }
+  .contact-form button {
+    background: var(--moss); color: var(--cream);
+    border: none; padding: 0.9rem 2rem;
+    font-family: 'Jost', sans-serif; font-size: 0.8rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.3s; align-self: flex-start;
+  }
+  .contact-form button:hover { background: var(--moss-light); }
+
+  footer {
+    background: var(--text-dark); color: rgba(245,240,232,0.5);
+    padding: 2rem; text-align: center;
+    font-size: 0.75rem; letter-spacing: 0.08em;
+  }
+  footer strong { color: var(--cream); }
+
+  @media (max-width: 680px) {
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">DeepRoot Design</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">DeepRoot Design Landscape</p>
+    <h1>Where <em>architecture</em><br>meets the ground</h1>
+    <p class="hero-sub">Professional landscape design rooted in architectural precision. From HOA submittals to full outdoor living spaces — designed in Revit, built with intention.</p>
+    <a href="#contact" class="hero-cta">Start a project</a>
+  </div>
+  <p class="hero-scroll">Summerville, SC &nbsp;↓</p>
+</section>
+
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-label">About</p>
+        <h2 class="section-title">Design fluency,<br>field experience</h2>
+        <p>DeepRoot Design is owned and operated by Sydney Szypszak — a designer with a background in architecture and construction management who found her true passion in the landscape.</p>
+        <p>With formal training in Revit and hands-on experience working under a licensed landscape architect, Sydney brings something rare to residential landscape design: the precision of an architect paired with the knowledge of someone who has worked the soil.</p>
+        <p>The result is design work that looks professional, holds up to HOA scrutiny, and translates seamlessly into real installations.</p>
+      </div>
+      <div class="about-stat-grid">
+        <div class="about-stat">
+          <div class="about-stat-num">1.5+</div>
+          <div class="about-stat-label">Years in architecture & landscape</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">Revit</div>
+          <div class="about-stat-label">Full 3D modeling & rendering</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">HOA</div>
+          <div class="about-stat-label">Submittal packages accepted</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">100%</div>
+          <div class="about-stat-label">Owner-operated & hands-on</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="section-inner">
+    <p class="section-label">Services</p>
+    <h2 class="section-title">What we offer</h2>
+    <p class="services-intro">Every project — whether a full design package or a simple mulch install — is handled with the same care and professionalism. Remote design services available anywhere.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-name">HOA Submittal Packages</div>
+        <p class="service-desc">Professional Revit-produced submittal packages including site plans, existing and proposed elevations, and plant schedules — formatted for HOA review boards.</p>
+        <p class="service-price">Starting at $200 · Available remotely</p>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Residential Landscape Design</div>
+        <p class="service-desc">Full design packages for homeowners — planting plans, layout drawings, material specifications, and plant schedules delivered as a professional document set.</p>
+        <p class="service-price">Custom quote · Available remotely</p>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Outdoor Living Space Design</div>
+        <p class="service-desc">Patios, pergolas, outdoor kitchens, and hardscape layouts — designed with architectural rigor and modeled in full 3D so you see it before it's built.</p>
+        <p class="service-price">Custom quote · Available remotely</p>
+      </div>
+      <div class="service-card">
+        <div class="service-name">3D Renderings & Perspectives</div>
+        <p class="service-desc">Photorealistic Revit renderings that let homeowners and contractors visualize the finished design before a single plant goes in the ground.</p>
+        <p class="service-price">Add-on to any design package</p>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Plant Installation</div>
+        <p class="service-desc">Designer-led installation for foundation plantings, bed redesigns, and new planting plans. Every install follows the design intent precisely.</p>
+        <p class="service-price">Quote based on scope · Summerville area</p>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Landscape Maintenance</div>
+        <p class="service-desc">Mowing, edging, mulch & pine straw installation, weeding, debris removal, and shrub & hedge trimming. Clean, consistent, professional results.</p>
+        <p class="service-price">Quote based on scope · Summerville area</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="section-inner">
+    <p class="section-label">How it works</p>
+    <h2 class="section-title">From photos to finished plan</h2>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <div class="process-title">You share the details</div>
+        <p class="process-desc">Send photos of your property and your address. For remote projects, that's all we need to get started.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <div class="process-title">We build the model</div>
+        <p class="process-desc">Your home and existing landscape are modeled in Revit — accurately, to scale, with real dimensions.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <div class="process-title">Design is developed</div>
+        <p class="process-desc">Proposed plantings, hardscape, and layout are designed and layered into the model with full plant specifications.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <div class="process-title">Package delivered</div>
+        <p class="process-desc">You receive a professional document set — plans, elevations, renderings, and plant schedule — ready for HOA or contractor use.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio" id="portfolio">
+  <div class="section-inner">
+    <p class="section-label">Portfolio</p>
+    <h2 class="section-title">Recent work</h2>
+    <div class="portfolio-note">
+      <strong>Project photography and renderings coming soon.</strong><br>
+      Current projects include HOA landscape submittals and foundation planting designs<br>in the Summerville, SC area. Reach out to see examples of our Revit drawing sets.
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="section-label">Contact</p>
+        <h2 class="section-title">Let's talk<br>about your space</h2>
+        <p>Whether you need an HOA submittal package, a full landscape design, or a simple install — reach out and we'll figure out what makes sense for your project.</p>
+        <div class="contact-detail">
+          <div class="contact-item">
+            <span>Phone</span>
+            (617) 320-0987
+          </div>
+          <div class="contact-item">
+            <span>Email</span>
+            sydney@deeprootdesign.com
+          </div>
+          <div class="contact-item">
+            <span>Service area</span>
+            Summerville, SC · Remote design available anywhere
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="return false;">
+        <input type="text" placeholder="Your name" />
+        <input type="email" placeholder="Email address" />
+        <select>
+          <option value="" disabled selected>I'm interested in...</option>
+          <option>HOA Submittal Package</option>
+          <option>Residential Landscape Design</option>
+          <option>Outdoor Living Space Design</option>
+          <option>3D Rendering</option>
+          <option>Plant Installation</option>
+          <option>Landscape Maintenance</option>
+          <option>Something else</option>
+        </select>
+        <textarea placeholder="Tell me a little about your project..."></textarea>
+        <button type="submit">Send inquiry</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>DeepRoot Design Landscape</strong> &nbsp;·&nbsp; Sydney Szypszak &nbsp;·&nbsp; Summerville, SC &nbsp;·&nbsp; © 2026
+</footer>
+
+</body>
+</html>
