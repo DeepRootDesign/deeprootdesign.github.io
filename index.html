@@ -762,7 +762,39 @@ footer strong { color: var(--cream); }
 
     <!-- LABOR DOCUMENTATION -->
     <div id="port-labor" class="port-panel">
-      <div class="port-coming">Labor documentation coming soon.</div>
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-title">Locals Street — Plant Installation</span>
+          <span class="project-meta">Labor Documentation &nbsp;·&nbsp; Summerville, SC</span>
+        </div>
+        <div class="gallery-track" id="gt5">
+          <div class="gallery-slide">
+            <img src="labor-locals-1.jpg" alt="Locals Street — before and after, new bed installation">
+            <div class="slide-caption">New bed installation — before &amp; after</div>
+          </div>
+          <div class="gallery-slide">
+            <img src="labor-locals-2.jpg" alt="Locals Street — before and after, foundation planting">
+            <div class="slide-caption">Foundation planting — before &amp; after</div>
+          </div>
+          <div class="gallery-slide">
+            <img src="labor-locals-3.jpg" alt="Locals Street — before and after, east elevation planting">
+            <div class="slide-caption">East elevation planting — before &amp; after</div>
+          </div>
+        </div>
+        <div class="gallery-controls">
+          <button class="gallery-btn" onclick="gSlide('gt5','gd5',-1)">← Prev</button>
+          <div class="gallery-dots" id="gd5"></div>
+          <button class="gallery-btn" onclick="gSlide('gt5','gd5',1)">Next →</button>
+        </div>
+        <div class="project-desc">
+          Installation documentation for the Locals Street landscape redesign. Work included new bed creation, plant installation, and black mulch application per the approved HOA submittal.
+          <div class="project-tags">
+            <span class="ptag">Plant Installation</span>
+            <span class="ptag">Bed Creation</span>
+            <span class="ptag">Before &amp; After</span>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -853,7 +885,7 @@ function gSlide(trackId, dotsId, dir) {
 }
 
 window.addEventListener('load', function() {
-  [['gt1','gd1'],['gt2','gd2'],['gt3','gd3'],['gt4','gd4']].forEach(function(pair) {
+  [['gt1','gd1'],['gt2','gd2'],['gt3','gd3'],['gt4','gd4'],['gt5','gd5']].forEach(function(pair) {
     initDots(pair[0], pair[1]);
     document.getElementById(pair[0]).addEventListener('scroll', function() {
       var w   = this.children[0].offsetWidth;
