@@ -794,6 +794,49 @@ footer strong { color: var(--cream); }
             <span class="ptag">Before &amp; After</span>
           </div>
         </div>
+        <!-- Napoli Lane -->
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-title">Napoli Lane — Plant Installation</span>
+          <span class="project-meta">Labor Documentation &nbsp;·&nbsp; Hanahan, SC</span>
+        </div>
+        <div class="gallery-track" id="gt6">
+          <div class="gallery-slide">
+            <img src="labor-napoli-1.jpg" alt="Napoli Lane — crape myrtle bed before and after">
+            <div class="slide-caption">Crape myrtle bed — before &amp; after</div>
+          </div>
+          <div class="gallery-slide">
+            <img src="labor-napoli-2.jpg" alt="Napoli Lane — palm entry bed before and after">
+            <div class="slide-caption">Palm entry bed — before &amp; after</div>
+          </div>
+          <div class="gallery-slide">
+            <img src="labor-napoli-3.jpg" alt="Napoli Lane — foundation bed before and after">
+            <div class="slide-caption">Foundation bed — before &amp; after</div>
+          </div>
+          <div class="gallery-slide">
+            <img src="labor-napoli-4.jpg" alt="Napoli Lane — front porch bed before and after">
+            <div class="slide-caption">Front porch bed — before &amp; after</div>
+          </div>
+          <div class="gallery-slide">
+            <img src="labor-napoli-5.jpg" alt="Napoli Lane — finished planting detail">
+            <div class="slide-caption">Finished planting detail</div>
+          </div>
+        </div>
+        <div class="gallery-controls">
+          <button class="gallery-btn" onclick="gSlide('gt6','gd6',-1)">← Prev</button>
+          <div class="gallery-dots" id="gd6"></div>
+          <button class="gallery-btn" onclick="gSlide('gt6','gd6',1)">Next →</button>
+        </div>
+        <div class="project-desc">
+          Full bed redesign and plant installation for a residential property in Hanahan, SC. Work included gutting and rebuilding three beds, structural pruning of existing crape myrtles, mulch refresh, and installation of zone 8b perennials including Plumbago 'Imperial Blue,' Agapanthus, Pentas, and Canna Lily.
+          <div class="project-tags">
+            <span class="ptag">Plant Installation</span>
+            <span class="ptag">Bed Redesign</span>
+            <span class="ptag">Structural Pruning</span>
+            <span class="ptag">Before &amp; After</span>
+          </div>
+        </div>
+      </div>
       </div>
     </div>
 
@@ -885,7 +928,7 @@ function gSlide(trackId, dotsId, dir) {
 }
 
 window.addEventListener('load', function() {
-  [['gt1','gd1'],['gt2','gd2'],['gt3','gd3'],['gt4','gd4'],['gt5','gd5']].forEach(function(pair) {
+  [['gt1','gd1'],['gt2','gd2'],['gt3','gd3'],['gt4','gd4'],['gt5','gd5'],['gt6','gd6']].forEach(function(pair) {
     initDots(pair[0], pair[1]);
     document.getElementById(pair[0]).addEventListener('scroll', function() {
       var w   = this.children[0].offsetWidth;
